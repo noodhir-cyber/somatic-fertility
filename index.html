@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumina Fertility — The journey of IVF, in 3D</title>
+  <meta name="description" content="Follow the journey of IVF from the first injection to the first heartbeat in an immersive, interactive 3D experience." />
+  <meta name="theme-color" content="#0a0c18" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23f1a3b5' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%238fd9cf'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader" class="loader" aria-live="polite">
+    <div class="loader__cell">
+      <span></span><span></span><span></span>
+    </div>
+    <p class="loader__label">Preparing your journey <b data-load>0%</b></p>
+    <div class="loader__bar"><i data-loadbar></i></div>
+  </div>
+
+  <!-- 3D -->
+  <canvas id="webgl" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div id="labels" class="labels" aria-hidden="true"></div>
+
+  <!-- Chrome -->
+  <header class="nav">
+    <a class="brand" href="#" aria-label="Lumina Fertility — home">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="5.2" fill="currentColor"/></svg>
+      <span>Lumina <em>Fertility</em></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#chapter-stimulation">The journey</a>
+      <a href="#begin">Our clinic</a>
+      <a href="#begin" class="btn btn--small">Book a consultation</a>
+    </nav>
+  </header>
+
+  <div class="progress" aria-hidden="true"><i data-progress></i></div>
+
+  <nav class="dots" aria-label="Chapters"></nav>
+
+  <div class="hud" aria-hidden="true">
+    <span class="hud__day" data-hud-day>Welcome</span>
+    <span class="hud__count"><b data-hud-index>01</b> / <span data-hud-total>10</span></span>
+  </div>
+
+  <!-- Scroll spacers: one per 3D chapter. The text lives in the fixed overlay below. -->
+  <main id="journey">
+    <div class="spacer spacer--hero" data-chapter="hero" id="chapter-hero"></div>
+    <div class="spacer" data-chapter="stimulation" id="chapter-stimulation"></div>
+    <div class="spacer" data-chapter="monitoring" id="chapter-monitoring"></div>
+    <div class="spacer" data-chapter="retrieval" id="chapter-retrieval"></div>
+    <div class="spacer" data-chapter="fertilisation" id="chapter-fertilisation"></div>
+    <div class="spacer" data-chapter="embryo" id="chapter-embryo"></div>
+    <div class="spacer" data-chapter="transfer" id="chapter-transfer"></div>
+    <div class="spacer" data-chapter="implantation" id="chapter-implantation"></div>
+    <div class="spacer" data-chapter="growing" id="chapter-growing"></div>
+    <div class="spacer" data-chapter="welcome" id="chapter-welcome"></div>
+
+    <!-- Final chapter is real in-flow content -->
+    <section class="begin" data-chapter="begin" id="begin">
+      <div class="begin__inner">
+        <p class="eyebrow">Your story</p>
+        <h2>Ready to begin yours?</h2>
+        <p class="lede">Every journey is different. Ours starts with an unhurried conversation — about you, your history and your hopes — and a plan built around them.</p>
+
+        <div class="cards">
+          <article class="card">
+            <span class="card__num">01</span>
+            <h3>A free first consultation</h3>
+            <p>Twenty minutes with a fertility specialist, in person or by video. No pressure, no jargon — just honest answers.</p>
+          </article>
+          <article class="card">
+            <span class="card__num">02</span>
+            <h3>A plan that is yours</h3>
+            <p>Stimulation protocols, ICSI, genetic testing, freezing — we recommend only what evidence says will help you.</p>
+          </article>
+          <article class="card">
+            <span class="card__num">03</span>
+            <h3>Support at every step</h3>
+            <p>A named nurse, counselling included, and a team you can reach seven days a week during treatment.</p>
+          </article>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn--primary" href="mailto:hello@example.com">Book a free consultation</a>
+          <a class="btn btn--ghost" href="tel:+440000000000">Call the clinic</a>
+        </div>
+
+        <ul class="stats" aria-label="Key facts">
+          <li><b>12&nbsp;million+</b><span>babies born through IVF worldwide since 1978</span></li>
+          <li><b>2–3 weeks</b><span>from first injection to embryo transfer</span></li>
+          <li><b>5 days</b><span>for an embryo to become a blastocyst</span></li>
+        </ul>
+
+        <footer class="footer">
+          <div class="footer__cols">
+            <div>
+              <p class="footer__brand">Lumina <em>Fertility</em></p>
+              <p class="small">This experience is an educational illustration of a typical IVF cycle. Timelines, doses and protocols vary between clinics and between patients. Always follow the guidance of your own care team.</p>
+            </div>
+            <div>
+              <p class="footer__title">3D model credits</p>
+              <ul class="credits">
+                <li><a href="https://sketchfab.com/3d-models/medical-syringe-22e711221a094a48a6ffe826d3fd6185" target="_blank" rel="noopener">Medical Syringe</a> by Alexander Troianovskyi — CC BY 4.0</li>
+                <li><a href="https://sketchfab.com/3d-models/cc0-sperm-af340f33a8574d60a65fa008233ad934" target="_blank" rel="noopener">Sperm</a> by plaggy — CC0</li>
+                <li><a href="https://sketchfab.com/3d-models/uterus-0c543295600d4feaa3bf723cc1bb1730" target="_blank" rel="noopener">Uterus</a> by Beste Zengin — CC BY 4.0</li>
+                <li><a href="https://sketchfab.com/3d-models/fetus-cdbadf8ba54e44ec9533a546dcd52830" target="_blank" rel="noopener">Fetus</a> by gelmi.com.br — CC BY 4.0</li>
+                <li><a href="https://sketchfab.com/3d-models/sleeping-baby-f64d9f687a2e458883d72489adfa5fba" target="_blank" rel="noopener">Sleeping Baby</a> by Syral86 — CC BY 4.0</li>
+              </ul>
+              <p class="small">Egg, embryo, follicles, DNA and instruments are procedurally generated in three.js.</p>
+            </div>
+          </div>
+          <p class="footer__legal small">© <span data-year>2026</span> Lumina Fertility (demonstration). Built with three.js.</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Fixed text overlay for the 3D chapters -->
+  <div class="overlay" id="overlay">
+
+    <article class="chapter chapter--hero" data-chapter="hero">
+      <div class="chapter__content">
+        <p class="eyebrow reveal">Lumina Fertility presents</p>
+        <h1 class="reveal">Every family<br /><em>has a beginning.</em></h1>
+        <p class="lede reveal">Follow the journey of IVF — from the first injection to the first heartbeat — in an interactive 3D experience.</p>
+        <div class="reveal">
+          <a class="btn btn--primary" href="#chapter-stimulation" data-begin>Begin the journey</a>
+        </div>
+        <div class="scrollcue reveal" aria-hidden="true"><span></span>Scroll to explore</div>
+      </div>
+    </article>
+
+    <article class="chapter" data-chapter="stimulation">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter one · Days 1–12</p>
+        <h2>Encouraging <em>the eggs</em></h2>
+        <p>In a natural cycle the ovaries release a single egg. During IVF, a daily hormone injection — follicle-stimulating hormone, or FSH — gently encourages the ovaries to mature several eggs at once, giving the best chance of creating healthy embryos.</p>
+        <p>The needle is finer than a sewing pin. Most people give the injections themselves at home, at roughly the same time each evening, for eight to twelve days.</p>
+        <ul class="facts">
+          <li><b>8–12</b><span>days of injections</span></li>
+          <li><b>~30 s</b><span>each evening</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter chapter--right" data-chapter="monitoring">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter two · Days 5–12</p>
+        <h2>Watching <em>them grow</em></h2>
+        <p>Every few days an ultrasound scan and a blood test track the follicles — the small fluid-filled sacs on the ovary in which each egg matures.</p>
+        <p>When the largest follicles reach about 18 millimetres, a final “trigger” injection ripens the eggs. Collection is booked for exactly 36 hours later.</p>
+        <ul class="facts">
+          <li><b>18–20 mm</b><span>follicle size at trigger</span></li>
+          <li><b>36 h</b><span>from trigger to collection</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter" data-chapter="retrieval">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter three · Day 14</p>
+        <h2>Gathering <em>the eggs</em></h2>
+        <p>Under light sedation, a fine needle guided by ultrasound passes into each follicle and gently draws out the fluid — and with it, the egg.</p>
+        <p>The whole procedure takes twenty to thirty minutes. Most people rest for an hour or two and go home the same day. The eggs travel a few metres down the corridor to the embryology lab.</p>
+        <ul class="facts">
+          <li><b>20–30 min</b><span>procedure</span></li>
+          <li><b>8–15</b><span>eggs collected on average</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter chapter--right" data-chapter="fertilisation">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter four · Day 14, in the lab</p>
+        <h2>Where <em>life begins</em></h2>
+        <p>Each mature egg now meets sperm. In conventional IVF they are simply placed together in a dish. With ICSI — intracytoplasmic sperm injection — an embryologist selects a single healthy sperm and places it directly inside the egg using a glass needle thinner than a human hair.</p>
+        <p>Within hours, the egg and sperm each form a pronucleus. When two appear, fertilisation has happened.</p>
+        <ul class="facts">
+          <li><b>0.1 mm</b><span>the egg, our largest cell</span></li>
+          <li><b>7 µm</b><span>width of the injection pipette</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter" data-chapter="embryo">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter five · Days 15–19</p>
+        <h2>Growing, <em>cell by cell</em></h2>
+        <p class="dyn"><span class="dyn__chip" data-dyn="embryoDay">Day 1 · Zygote</span></p>
+        <p>The embryos rest in an incubator that mirrors the body — 37 °C, precise gases, complete darkness — while a camera watches every division.</p>
+        <p>One cell becomes two, then four, then eight. By day five the embryo is a blastocyst: a hollow ball of a hundred cells or more, with an inner cluster destined to become the baby and an outer layer that will form the placenta.</p>
+      </div>
+    </article>
+
+    <article class="chapter chapter--right" data-chapter="transfer">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter six · Day 19</p>
+        <h2>Coming <em>home</em></h2>
+        <p>The healthiest embryo — usually a single blastocyst — is drawn into a soft, thin catheter and guided through the cervix into the uterus, with ultrasound showing the way.</p>
+        <p>There is no anaesthetic and no recovery. It feels much like a smear test and takes a few minutes. Any other good-quality embryos can be frozen for the future.</p>
+        <ul class="facts">
+          <li><b>1</b><span>embryo transferred, usually</span></li>
+          <li><b>5 min</b><span>and you can walk out</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter" data-chapter="implantation">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter seven · Days 20–33</p>
+        <h2>The <em>two-week wait</em></h2>
+        <p>Over the next few days the blastocyst hatches from its shell and nestles into the lining of the uterus. Progesterone supports the lining as the connection forms.</p>
+        <p>Nine to fourteen days after transfer, a blood test measures hCG — the pregnancy hormone. This is the wait every family remembers.</p>
+        <ul class="facts">
+          <li><b>Day 6–10</b><span>after fertilisation: implantation</span></li>
+          <li><b>hCG</b><span>the hormone the test looks for</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="chapter chapter--right" data-chapter="growing">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter eight · Weeks 6–40</p>
+        <h2>A heartbeat <em>at six weeks</em></h2>
+        <p class="dyn"><span class="dyn__chip" data-dyn="week">Week 8 · the size of a raspberry</span></p>
+        <p>Around six weeks after transfer, the first scan shows a flicker of heartbeat. From here, care passes to routine antenatal services — the pregnancy continues just like any other.</p>
+      </div>
+    </article>
+
+    <article class="chapter" data-chapter="welcome">
+      <div class="chapter__content">
+        <p class="eyebrow">Chapter nine · Day one</p>
+        <h2>Hello, <em>world.</em></h2>
+        <p>Since the first IVF birth in 1978, more than twelve million babies have arrived this way. Every one of them began exactly like this.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
